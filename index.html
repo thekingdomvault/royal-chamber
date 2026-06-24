@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URGENT ROYAL DECREE ⚔️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background-color: #e8d5a3;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(180,140,70,0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(160,120,50,0.2) 0%, transparent 50%);
+      font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+      overflow-x: hidden;
+    }
+
+    .deco {
+      position: fixed;
+      font-size: 2.2rem;
+      opacity: 0.13;
+      user-select: none;
+      pointer-events: none;
+      animation: floaty 6s ease-in-out infinite;
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(var(--r)); }
+      50%       { transform: translateY(-14px) rotate(calc(var(--r) + 10deg)); }
+    }
+
+    .scroll {
+      max-width: 580px;
+      margin: 2rem auto;
+      padding: 2.2rem 2rem;
+      background: #fdf6e3;
+      border: 4px double #8b6914;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.22), inset 0 0 30px rgba(180,140,70,0.08);
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .scroll::before { content: '⚜'; position: absolute; top: 0.6rem; left: 0.8rem; font-size: 1.3rem; color: #8b6914; }
+    .scroll::after  { content: '⚜'; position: absolute; bottom: 0.6rem; right: 0.8rem; font-size: 1.3rem; color: #8b6914; }
+
+    .top-label {
+      font-size: 0.75rem;
+      color: #7a5c1e;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.4rem;
+    }
+
+    .decree-title {
+      font-size: 2rem;
+      color: #4a1c00;
+      margin-bottom: 0.2rem;
+      text-shadow: 2px 2px 0 rgba(139,105,20,0.25);
+    }
+
+    .divider {
+      border: none;
+      border-top: 3px double #8b6914;
+      margin: 1rem 0;
+    }
+
+    .messenger-wrap { margin: 1rem 0; }
+
+    .messenger-circle {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 0.6rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #8b6914;
+      background: #d4a853;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .messenger-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .messenger-caption {
+      font-size: 0.78rem;
+      color: #7a5c1e;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .decree-body {
+      font-size: 0.93rem;
+      color: #3d2800;
+      line-height: 1.85;
+      margin: 0.8rem 0;
+    }
+
+    .knight-name {
+      color: #8b0000;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .her-highness {
+      display: block;
+      font-size: 1.5rem;
+      color: #8b0000;
+      margin: 0.4rem 0;
+    }
+
+    .warning-box {
+      background: #fff5cc;
+      border: 2px dashed #c9a227;
+      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.8rem;
+      color: #6b4f10;
+      margin: 0.8rem 0;
+    }
+
+    .identity-section { margin: 1.5rem 0 0.8rem; }
+
+    .identity-title {
+      font-size: 1.1rem;
+      color: #4a1c00;
+      margin-bottom: 0.4rem;
+    }
+
+    .identity-sub {
+      font-size: 0.8rem;
+      color: #7a5c1e;
+      margin-bottom: 1.2rem;
+    }
+
+    .err {
+      display: none;
+      background: #fff0f0;
+      border: 2px solid #e88;
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.82rem;
+      color: #8b0000;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .field { margin-bottom: 1.1rem; text-align: left; }
+
+    .field label {
+      display: block;
+      font-size: 0.82rem;
+      color: #6b4f10;
+      font-weight: bold;
+      margin-bottom: 0.45rem;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 0.78rem 1rem;
+      background: #fffdf5;
+      border: 2px solid #c9a227;
+      border-radius: 8px;
+      font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+      font-size: 0.9rem;
+      color: #3d2800;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus { border-color: #8b0000; }
+    .field input::placeholder { color: rgba(61,40,0,0.3); }
+    .field input[type="date"]::-webkit-calendar-picker-indicator { opacity: 0.5; cursor: pointer; }
+
+    .enter-btn {
+      width: 100%;
+      padding: 0.95rem;
+      background: #8b0000;
+      border: 3px solid #5a0000;
+      border-radius: 8px;
+      color: #fdf6e3;
+      font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #5a0000;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .enter-btn:hover { background: #a00000; }
+    .enter-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #5a0000; }
+
+    .footer-note {
+      font-size: 0.72rem;
+      color: #9a7a3a;
+      margin-top: 1.3rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 500px) {
+      .scroll { margin: 1rem; padding: 1.6rem 1.2rem; }
+      .decree-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deco" style="top:4%;left:2%;--r:-15deg;animation-delay:0s;">⚔️</div>
+<div class="deco" style="top:8%;right:4%;--r:20deg;animation-delay:1s;">👑</div>
+<div class="deco" style="top:42%;left:1%;--r:-8deg;animation-delay:2s;">🛡️</div>
+<div class="deco" style="top:55%;right:2%;--r:12deg;animation-delay:0.5s;">⚜️</div>
+<div class="deco" style="bottom:12%;left:3%;--r:22deg;animation-delay:1.5s;">🏰</div>
+<div class="deco" style="bottom:4%;right:6%;--r:-18deg;animation-delay:2.5s;">👑</div>
+<div class="deco" style="top:72%;left:1%;--r:5deg;animation-delay:3s;">⚔️</div>
+
+<div class="scroll">
+
+  <p class="top-label">⚜ Official Kingdom Document ⚜</p>
+  <h1 class="decree-title">⚔️ ROYAL DECREE ⚔️</h1>
+
+  <hr class="divider" />
+
+  <div class="messenger-wrap">
+    <div class="messenger-circle" id="messenger-circle">
+     
+      <img
+        src="messenger.jpg"
+        alt="Your Royal Knights Assistant"
+        onerror="this.style.display='none'; document.getElementById('fallback-emoji').style.display='block';"
+      />
+      <span id="fallback-emoji" style="display:none;">🐿️</span>
+    </div>
+    <p class="messenger-caption">
+      Your Royal Knights Assistant hath arrived<br />
+      (he knocked over 3 vases getting here and ate someone's lunch)
+    </p>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="decree-body">
+    <p>HEAR YE HEAR YE 📯</p>
+    <br />
+    <p>
+      Let it be known across all the lands that this VERY IMPORTANT and TOTALLY URGENT message
+      was crafted with great effort and questionable time management by
+    </p>
+    <br />
+    <span class="knight-name">⚔️ Your Royal Knight ⚔️</span>
+    <br /><br />
+    <p>and is intended SOLELY and EXCLUSIVELY for</p>
+    <strong class="her-highness">👑 Her Royal Highness 👑</strong>
+
+    <div class="warning-box">
+      ⚠️ If thou art NOT Her Royal Highness please close this tab immediately and go touch some grass.
+      Your Royal Knights Assistant is watching. He WILL report back to the Knight.
+    </div>
+
+    <p>
+      Your Royal Knights Assistant hath waddled across seven kingdoms, climbed two trees
+      and consumed approximately four acorns on the journey just to deliver this message to you specifically.
+      Please appreciate his sacrifice.
+    </p>
+    <br />
+    <p>To gain entry to the Royal Chamber thou must first prove thy identity. The kingdom demands it.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="identity-section">
+    <p class="identity-title">🔐 Royal Identity Verification 🔐</p>
+    <p class="identity-sub">Only the TRUE Her Royal Highness would know these answers. Choose wisely.</p>
+
+    <div class="err" id="err">
+      🚫 THE KINGDOM REJECTS THEE 🚫<br />
+      <span style="font-size:0.78rem;">
+        Thou hath entered the wrong answers. Your Royal Knights Assistant has informed the Knight.
+        He is currently pacing.
+      </span>
+    </div>
+
+    <div class="field">
+      <label>⚔️ What doth Her Royal Highness consume with great and unwavering enthusiasm?</label>
+      <input type="text" id="inp-food" placeholder="Speak thy truth to the kingdom..." autocomplete="off" />
+    </div>
+
+    <div class="field">
+      <label>📜 On what fateful day did Her Royal Highness grace this world with her presence?</label>
+      <input type="date" id="inp-dob" />
+    </div>
+
+    <button class="enter-btn" id="btn-enter">
+      ⚜️ I AM HER ROYAL HIGHNESS. LET ME IN. ⚜️
+    </button>
+  </div>
+
+  <p class="footer-note">
+    Official Document of the Royal Knights Chamber 🏰<br />
+    Unauthorised entry shall be met with great disappointment from Your Royal Knights Assistant.<br />
+    He will make a face. It will be devastating.
+  </p>
+
+</div>
+
+<script>
+
+const FOOD_HASH = '8b3e67c5be6cb86e13708bb2a7bb5fc2b2dd940c60bdfdad5b36038625a6c215';
+const DOB_HASH  = '6f9d9f1a03fea3bbad21d4ef3646285cbb73e6999fad968a7efd58b1aeccda79';
+
+
+const sha = async s => {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2, '0')).join('');
+};
+
+document.getElementById('btn-enter').addEventListener('click', async () => {
+  const food = document.getElementById('inp-food').value.trim().toLowerCase();
+  const dob  = document.getElementById('inp-dob').value;
+  const err  = document.getElementById('err');
+
+  const [fh, dh] = await Promise.all([sha(food), sha(dob)]);
+
+  if (fh === FOOD_HASH && dh === DOB_HASH) {
+    err.style.display = 'none';
+    // gallery page goes here once we build it
+    alert('Access granted to the Royal Chamber! 🎉');
+  } else {
+    err.style.display = 'block';
+  }
+});
+
+['inp-food', 'inp-dob'].forEach(id => {
+  document.getElementById(id).addEventListener('keypress', e => {
+    if (e.key === 'Enter') document.getElementById('btn-enter').click();
+  });
+});
+</script>
+</body>
+</html>
