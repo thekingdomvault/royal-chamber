@@ -347,6 +347,9 @@ Just replace this placeholder text with your actual words.</p>
 </div>
 
 <script>
+if (sessionStorage.getItem('royal_access') !== 'granted') {
+  window.location.href = 'index.html';
+}  
 // ════════════════════════════════════════════════
 //  Add your photo filenames here
 //  Upload each file to the GitHub repo first
