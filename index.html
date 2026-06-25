@@ -328,6 +328,7 @@ document.getElementById('btn-enter').addEventListener('click', async () => {
 
   if (fh === FOOD_HASH && dh === DOB_HASH) {
     err.style.display = 'none';
+    sessionStorage.setItem('royal_access', 'granted');
     window.location.href = 'gallery.html';
   } else {
     err.style.display = 'block';
