@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Srishti 👑</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background-color: #e8d5a3;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(180,140,70,0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(160,120,50,0.2) 0%, transparent 50%);
+      font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+      overflow-x: hidden;
+    }
+
+    .deco {
+      position: fixed;
+      font-size: 2.2rem;
+      opacity: 0.13;
+      user-select: none;
+      pointer-events: none;
+      animation: floaty 6s ease-in-out infinite;
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(var(--r)); }
+      50%       { transform: translateY(-14px) rotate(calc(var(--r) + 10deg)); }
+    }
+
+    .page-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Sign Board ── */
+    .sign-outer {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .sign-ropes {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4rem;
+      font-size: 1.4rem;
+      line-height: 1;
+      color: #8b6914;
+    }
+
+    .sign-board {
+      background: #1e0f07;
+      border: 4px solid #8b6914;
+      border-radius: 10px;
+      padding: 2rem 2rem;
+      box-shadow:
+        0 8px 28px rgba(0,0,0,0.45),
+        inset 0 0 40px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sign-board::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 40px,
+        rgba(255,255,255,0.015) 40px,
+        rgba(255,255,255,0.015) 41px
+      );
+    }
+
+    .sign-text {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 700;
+      color: #ffd700;
+      position: relative;
+      animation: signFlicker 5s infinite;
+      line-height: 1.3;
+    }
+
+    .sign-subtitle {
+      font-size: 0.85rem;
+      color: #c9a227;
+      margin-top: 0.5rem;
+      opacity: 0.7;
+      animation: signFlicker 5s infinite 0.3s;
+    }
+
+    @keyframes signFlicker {
+      0%, 17%, 19%, 22%, 52%, 56%, 100% {
+        text-shadow:
+          0 0 8px #ffd700,
+          0 0 18px #ffa500,
+          0 0 35px #ff6600,
+          0 0 60px #ff4400;
+        opacity: 1;
+      }
+      18%, 21%, 54% {
+        text-shadow: none;
+        opacity: 0.4;
+      }
+    }
+
+    /* ── Shared card style ── */
+    .card {
+      background: #fdf6e3;
+      border: 4px double #8b6914;
+      border-radius: 10px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      position: relative;
+    }
+
+    .card::before { content: '⚜'; position: absolute; top: 0.5rem; left: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
+    .card::after  { content: '⚜'; position: absolute; bottom: 0.5rem; right: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #4a1c00;
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 2px double #8b6914;
+      margin: 1rem 0;
+    }
+
+    /* ── Cat image ── */
+    .cat-frame {
+      text-align: center;
+    }
+
+    .cat-frame img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 8px;
+      border: 3px solid #c9a227;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .cat-caption {
+      font-size: 0.82rem;
+      color: #7a5c1e;
+      font-style: italic;
+      margin-top: 0.8rem;
+    }
+
+    /* ── Passage ── */
+    .passage {
+      font-size: 0.98rem;
+      color: #3d2800;
+      line-height: 1.95;
+      white-space: pre-line;
+    }
+
+    /* ── Pics grid ── */
+    .pics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .pic-slot {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid #c9a227;
+      background: #f0e6c0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .pic-slot:hover { transform: scale(1.03); }
+
+    .pic-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── Video ── */
+    .video-wrap {
+      text-align: center;
+    }
+
+    .video-wrap video {
+      width: 100%;
+      max-width: 480px;
+      border-radius: 10px;
+      border: 3px solid #c9a227;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .video-placeholder {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 16/9;
+      background: #2c1a0e;
+      border-radius: 10px;
+      border: 3px solid #c9a227;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      font-size: 0.85rem;
+      color: #c9a227;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ── Lightbox ── */
+    #lb {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(5,5,5,0.96);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    #lb.open { display: flex; }
+    #lb-inner { max-width: min(92vw, 860px); max-height: 90vh; }
+    #lb-inner img { max-width: 100%; max-height: 90vh; border-radius: 10px; object-fit: contain; }
+    .lb-close {
+      position: fixed; top: 1rem; right: 1.2rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      font-family: 'Comic Neue', cursive;
+      font-size: 0.82rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 500px) {
+      .sign-text { font-size: 1.5rem; }
+      .sign-ropes { padding: 0 2.5rem; }
+      .pics-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deco" style="top:4%;left:2%;--r:-15deg;animation-delay:0s;">⚔️</div>
+<div class="deco" style="top:8%;right:4%;--r:20deg;animation-delay:1s;">👑</div>
+<div class="deco" style="top:42%;left:1%;--r:-8deg;animation-delay:2s;">🛡️</div>
+<div class="deco" style="top:55%;right:2%;--r:12deg;animation-delay:0.5s;">⚜️</div>
+<div class="deco" style="bottom:12%;left:3%;--r:22deg;animation-delay:1.5s;">🏰</div>
+<div class="deco" style="bottom:4%;right:6%;--r:-18deg;animation-delay:2.5s;">👑</div>
+
+<div class="page-wrap">
+
+  <!-- ── SIGN BOARD ── -->
+  <div class="sign-outer">
+    <div class="sign-ropes">
+      <span>🪢</span><span>🪢</span>
+    </div>
+    <div class="sign-board">
+      <h1 class="sign-text">✨ Happiest Birthday Srishti ✨</h1>
+      <p class="sign-subtitle">👑 Her Royal Highness has entered the Royal Chamber 👑</p>
+    </div>
+  </div>
+
+  <!-- ── CAT IMAGE ── -->
+  <div class="card">
+    <p class="section-title">📜 A Royal Portrait 📜</p>
+    <hr class="divider" />
+    <div class="cat-frame">
+      <!--
+        Upload your image to the GitHub repo and replace 'cafe.jpg' with your filename
+      -->
+      <img src="cafe.jpg" alt="A royal portrait" />
+      <p class="cat-caption">
+        Two nobles, one rose, zero chill. As it should be in the kingdom. 🌹
+      </p>
+    </div>
+  </div>
+
+  <!-- ── PASSAGE ── -->
+  <div class="card">
+    <p class="section-title">⚔️ Words from Your Royal Knight ⚔️</p>
+    <hr class="divider" />
+    <!--
+      Replace the text below with your actual message to her
+    -->
+    <p class="passage">Write your message to Srishti here.
+
+You can write as much as you want, it will wrap nicely.
+
+Just replace this placeholder text with your actual words.</p>
+  </div>
+
+  <!-- ── HER PICS ── -->
+  <div class="card">
+    <p class="section-title">🎞️ Royal Archives 🎞️</p>
+    <hr class="divider" />
+    <!--
+      For each photo:
+      1. Upload it to the GitHub repo
+      2. Add an entry to the PICS array in the script below
+    -->
+    <div class="pics-grid" id="pics-grid"></div>
+  </div>
+
+  <!-- ── VIDEO MESSAGE ── -->
+  <div class="card">
+    <p class="section-title">📽️ Royal Message from the Knight 📽️</p>
+    <hr class="divider" />
+    <div class="video-wrap">
+      <!--
+        Upload your video to the GitHub repo and replace 'message.mp4' with your filename
+        If you haven't recorded it yet, the placeholder below shows until you add the file
+      -->
+      <video id="royal-video" controls style="display:none;" src="message.mp4"
+        oncanplay="this.style.display='block'; document.getElementById('vid-placeholder').style.display='none';">
+      </video>
+      <div class="video-placeholder" id="vid-placeholder">
+        📹 The Royal Knight is currently composing his video message.<br/>
+        Check back soon, Your Highness.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div id="lb">
+  <button class="lb-close" onclick="closeLb()">✕ Close</button>
+  <div id="lb-inner"></div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+//  Add your photo filenames here
+//  Upload each file to the GitHub repo first
+// ════════════════════════════════════════════════
+const PICS = [
+  // 'photo1.jpg',
+  // 'photo2.jpg',
+  // 'photo3.jpg',
+];
+// ════════════════════════════════════════════════
+
+const grid = document.getElementById('pics-grid');
+
+if (PICS.length === 0) {
+  grid.innerHTML = '<p style="color:#9a7a3a;font-size:0.82rem;text-align:center;grid-column:1/-1;padding:1.5rem;">The Royal Archives are being assembled... 📦</p>';
+} else {
+  PICS.forEach(src => {
+    const slot = document.createElement('div');
+    slot.className = 'pic-slot';
+    const img = document.createElement('img');
+    img.src = src; img.alt = ''; img.loading = 'lazy';
+    slot.appendChild(img);
+    slot.addEventListener('click', () => {
+      document.getElementById('lb-inner').innerHTML = `<img src="${src}" />`;
+      document.getElementById('lb').classList.add('open');
+    });
+    grid.appendChild(slot);
+  });
+}
+
+function closeLb() {
+  document.getElementById('lb').classList.remove('open');
+  document.getElementById('lb-inner').innerHTML = '';
+}
+document.getElementById('lb').addEventListener('click', e => {
+  if (e.target === document.getElementById('lb')) closeLb();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+</script>
+</body>
+</html>
