@@ -328,8 +328,7 @@ document.getElementById('btn-enter').addEventListener('click', async () => {
 
   if (fh === FOOD_HASH && dh === DOB_HASH) {
     err.style.display = 'none';
-    // gallery page goes here once we build it
-    alert('Access granted to the Royal Chamber! 🎉');
+    window.location.href = 'gallery.html';
   } else {
     err.style.display = 'block';
   }
