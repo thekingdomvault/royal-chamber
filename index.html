@@ -184,7 +184,6 @@
     }
     .field input:focus { border-color: #8b0000; }
     .field input::placeholder { color: rgba(61,40,0,0.3); }
-    .field input[type="date"]::-webkit-calendar-picker-indicator { opacity: 0.5; cursor: pointer; }
 
     .enter-btn {
       width: 100%;
@@ -281,7 +280,7 @@
 
   <div class="identity-section">
     <p class="identity-title">🔐 Royal Identity Verification 🔐</p>
-    <p class="identity-sub">Only the TRUE Her Royal Highness would know these answers. Choose wisely.</p>
+    <p class="identity-sub">Only the TRUE Heir to the Royal Kingdom's throne would know these answers. Choose wisely.</p>
 
     <div class="err" id="err">
       🚫 THE KINGDOM REJECTS THEE 🚫<br />
@@ -306,8 +305,8 @@
     </div>
 
     <div class="field">
-      <label>📜 On what fateful day did Her Royal Highness grace this world with her presence?</label>
-      <input type="date" id="inp-dob" />
+      <label>📜 What is the middle name of Her Royal Highness?</label>
+      <input type="text" id="inp-dob" placeholder="Speak thy truth to the kingdom..." autocomplete="off" />
     </div>
 
     <button class="enter-btn" id="btn-enter">
@@ -324,12 +323,12 @@
 </div>
 
 <script>
-var _x=["8b3e67c5be6cb86e13708bb2a7bb5fc2b2dd940c60bdfdad5b36038625a6c215","6f9d9f1a03fea3bbad21d4ef3646285cbb73e6999fad968a7efd58b1aeccda79"];
+var _x=["8b3e67c5be6cb86e13708bb2a7bb5fc2b2dd940c60bdfdad5b36038625a6c215","5f14b1474e116d39c8ce3c9fcae957d482a9d1219d8d446c0fbbe54a76624371"];
 var _p=async t=>{var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(n=>n.toString(16).padStart(2,"0")).join("")};
 
 document.getElementById('btn-enter').addEventListener('click', async () => {
   var a=document.getElementById('inp-food').value.trim().toLowerCase();
-  var b=document.getElementById('inp-dob').value;
+  var b=document.getElementById('inp-dob').value.trim().toLowerCase();
   var e=document.getElementById('err');
   var g=document.getElementById('err-gif');
   var r=await Promise.all([_p(a),_p(b)]);
