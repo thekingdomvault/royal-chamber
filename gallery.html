@@ -139,60 +139,17 @@
       margin: 1rem 0;
     }
 
-    /* ── Cat image ── */
-    .cat-frame {
+    /* ── Bowing Gif ── */
+    .gif-wrap {
       text-align: center;
     }
 
-    .cat-frame img {
+    .gif-wrap img {
       width: 100%;
-      max-width: 420px;
+      max-width: 480px;
       border-radius: 8px;
       border: 3px solid #c9a227;
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    }
-
-    .cat-caption {
-      font-size: 0.82rem;
-      color: #7a5c1e;
-      font-style: italic;
-      margin-top: 0.8rem;
-    }
-
-    /* ── Passage ── */
-    .passage {
-      font-size: 0.98rem;
-      color: #3d2800;
-      line-height: 1.95;
-      white-space: pre-line;
-    }
-
-    /* ── Pics grid ── */
-    .pics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 0.9rem;
-    }
-
-    .pic-slot {
-      aspect-ratio: 1;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 2px solid #c9a227;
-      background: #f0e6c0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .pic-slot:hover { transform: scale(1.03); }
-
-    .pic-slot img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
 
     /* ── Video ── */
@@ -202,57 +159,18 @@
 
     .video-wrap video {
       width: 100%;
-      max-width: 480px;
+      max-width: 100%;
+      height: auto;
       border-radius: 10px;
       border: 3px solid #c9a227;
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    }
-
-    .video-placeholder {
-      width: 100%;
-      max-width: 480px;
-      aspect-ratio: 16/9;
-      background: #2c1a0e;
-      border-radius: 10px;
-      border: 3px solid #c9a227;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
       margin: 0 auto;
-      font-size: 0.85rem;
-      color: #c9a227;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    /* ── Lightbox ── */
-    #lb {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(5,5,5,0.96);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-    }
-    #lb.open { display: flex; }
-    #lb-inner { max-width: min(92vw, 860px); max-height: 90vh; }
-    #lb-inner img { max-width: 100%; max-height: 90vh; border-radius: 10px; object-fit: contain; }
-    .lb-close {
-      position: fixed; top: 1rem; right: 1.2rem;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #fff;
-      font-family: 'Comic Neue', cursive;
-      font-size: 0.82rem;
-      padding: 0.4rem 0.9rem;
-      border-radius: 6px;
-      cursor: pointer;
     }
 
     @media (max-width: 500px) {
       .sign-text { font-size: 1.5rem; }
       .sign-ropes { padding: 0 2.5rem; }
-      .pics-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -273,121 +191,36 @@
       <span>🪢</span><span>🪢</span>
     </div>
     <div class="sign-board">
-      <h1 class="sign-text">✨ Happiest Birthday Srishti ✨</h1>
-      <p class="sign-subtitle">👑 Her Royal Highness has entered the Royal Chamber 👑</p>
+      <h1 class="sign-text">Happiest Birthday Srishti!</h1>
+      <p class="sign-subtitle">Hear Ye! Hear Ye! Her Royal Highness has entered the Royal Chamber</p>
     </div>
   </div>
 
-  <!-- ── CAT IMAGE ── -->
+  <!-- ── BOWING GIF ── -->
   <div class="card">
-    <p class="section-title">📜 A Royal Portrait 📜</p>
-    <hr class="divider" />
-    <div class="cat-frame">
-      <!--
-        Upload your image to the GitHub repo and replace 'cafe.jpg' with your filename
-      -->
-      <img src="cafe.jpg" alt="A royal portrait" />
-      <p class="cat-caption">
-        Two nobles, one rose, zero chill. As it should be in the kingdom. 🌹
-      </p>
+    <div class="gif-wrap">
+      <!-- Make sure Bowing_Gif.gif is uploaded to your repo -->
+      <img src="Bowing_Gif.gif" alt="Royal bow" />
     </div>
   </div>
 
-  <!-- ── PASSAGE ── -->
+  <!-- ── VIDEO ── -->
   <div class="card">
-    <p class="section-title">⚔️ Words from Your Royal Knight ⚔️</p>
-    <hr class="divider" />
-    <!--
-      Replace the text below with your actual message to her
-    -->
-    <p class="passage">Write your message to Srishti here.
-
-You can write as much as you want, it will wrap nicely.
-
-Just replace this placeholder text with your actual words.</p>
-  </div>
-
-  <!-- ── HER PICS ── -->
-  <div class="card">
-    <p class="section-title">🎞️ Royal Archives 🎞️</p>
-    <hr class="divider" />
-    <!--
-      For each photo:
-      1. Upload it to the GitHub repo
-      2. Add an entry to the PICS array in the script below
-    -->
-    <div class="pics-grid" id="pics-grid"></div>
-  </div>
-
-  <!-- ── VIDEO MESSAGE ── -->
-  <div class="card">
-    <p class="section-title">📽️ Royal Message from the Knight 📽️</p>
+    <p class="section-title">Heres A not so long message from the Royal Knight 😉</p>
     <hr class="divider" />
     <div class="video-wrap">
-      <!--
-        Upload your video to the GitHub repo and replace 'message.mp4' with your filename
-        If you haven't recorded it yet, the placeholder below shows until you add the file
-      -->
-      <video id="royal-video" controls style="display:none;" src="message.mp4"
-        oncanplay="this.style.display='block'; document.getElementById('vid-placeholder').style.display='none';">
-      </video>
-      <div class="video-placeholder" id="vid-placeholder">
-        📹 The Royal Knight is currently composing his video message.<br/>
-        Check back soon, Your Highness.
-      </div>
+      <!-- Make sure "Video Project 1.mp4" is uploaded to your repo -->
+      <!-- If your filename has no spaces use: src="Video_Project_1.mp4" -->
+      <video controls src="Video Project 1.mp4"></video>
     </div>
   </div>
 
-</div>
-
-<!-- Lightbox -->
-<div id="lb">
-  <button class="lb-close" onclick="closeLb()">✕ Close</button>
-  <div id="lb-inner"></div>
 </div>
 
 <script>
-if (sessionStorage.getItem('royal_access') !== 'granted') {
-  window.location.href = 'index.html';
-}  
-// ════════════════════════════════════════════════
-//  Add your photo filenames here
-//  Upload each file to the GitHub repo first
-// ════════════════════════════════════════════════
-const PICS = [
-  // 'photo1.jpg',
-  // 'photo2.jpg',
-  // 'photo3.jpg',
-];
-// ════════════════════════════════════════════════
-
-const grid = document.getElementById('pics-grid');
-
-if (PICS.length === 0) {
-  grid.innerHTML = '<p style="color:#9a7a3a;font-size:0.82rem;text-align:center;grid-column:1/-1;padding:1.5rem;">The Royal Archives are being assembled... 📦</p>';
-} else {
-  PICS.forEach(src => {
-    const slot = document.createElement('div');
-    slot.className = 'pic-slot';
-    const img = document.createElement('img');
-    img.src = src; img.alt = ''; img.loading = 'lazy';
-    slot.appendChild(img);
-    slot.addEventListener('click', () => {
-      document.getElementById('lb-inner').innerHTML = `<img src="${src}" />`;
-      document.getElementById('lb').classList.add('open');
-    });
-    grid.appendChild(slot);
-  });
-}
-
-function closeLb() {
-  document.getElementById('lb').classList.remove('open');
-  document.getElementById('lb-inner').innerHTML = '';
-}
-document.getElementById('lb').addEventListener('click', e => {
-  if (e.target === document.getElementById('lb')) closeLb();
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+  if (sessionStorage.getItem('royal_access') !== 'granted') {
+    window.location.href = 'index.html';
+  }
 </script>
 </body>
 </html>
