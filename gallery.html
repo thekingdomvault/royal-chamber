@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Srishti 👑</title>
+  <title>Happy Birthday Srishti</title>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -139,11 +139,32 @@
       margin: 1rem 0;
     }
 
-    /* ── Bowing Gif ── */
+    /* ── Bow down text ── */
+    .bow-text {
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .bow-text p {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #4a1c00;
+      line-height: 1.7;
+    }
+
+    .bow-text .bow-sub {
+      font-size: 0.82rem;
+      color: #7a5c1e;
+      font-style: italic;
+      margin-top: 0.3rem;
+    }
+
+    /* ── Bowing video/gif ── */
     .gif-wrap {
       text-align: center;
     }
 
+    .gif-wrap video,
     .gif-wrap img {
       width: 100%;
       max-width: 480px;
@@ -152,15 +173,14 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
 
-    /* ── Video ── */
-    .video-wrap {
+    /* ── YouTube embed ── */
+    .yt-wrap {
       text-align: center;
     }
 
-    .video-wrap video {
+    .yt-wrap iframe {
       width: 100%;
-      max-width: 100%;
-      height: auto;
+      aspect-ratio: 16 / 9;
       border-radius: 10px;
       border: 3px solid #c9a227;
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
@@ -192,26 +212,35 @@
     </div>
     <div class="sign-board">
       <h1 class="sign-text">Happiest Birthday Srishti!</h1>
-      <p class="sign-subtitle">Hear Ye! Hear Ye! Her Royal Highness has entered the Royal Chamber!</p>
+      <p class="sign-subtitle">Hear Ye! Hear Ye! Her Royal Highness has entered the Royal Chamber 📯</p>
     </div>
   </div>
 
   <!-- ── BOWING GIF ── -->
   <div class="card">
+    <div class="bow-text">
+      <p>ALL SHALL BOW BEFORE HER MAJESTY 📯</p>
+      <p>Show thy respect to the one and only Srishti</p>
+      <p class="bow-sub">Failure to bow shall result in immediate banishment from the kingdom, you have been warned!</p>
+    </div>
+    <hr class="divider" />
     <div class="gif-wrap">
-      <!-- Make sure Bowing_Gif.gif is uploaded to your repo -->
-      <img src="Bowing_Gif.mp4" alt="Royal bow" />
+      <!-- If your file is a .gif change to <img src="Bowing_Gif.gif"> -->
+      <video src="Bowing_Gif.mp4" autoplay loop muted playsinline></video>
     </div>
   </div>
 
-  <!-- ── VIDEO ── -->
+  <!-- ── YOUTUBE VIDEO ── -->
   <div class="card">
-    <p class="section-title">Here's a not so long message from the Royal Knight 😉</p>
+    <p class="section-title">Here's a not so long message from your Royal Knight 😉</p>
     <hr class="divider" />
-    <div class="video-wrap">
-      <!-- Make sure "Video Project 1.mp4" is uploaded to your repo -->
-      <!-- If your filename has no spaces use: src="Video_Project_1.mp4" -->
-      <video controls src="Video Project 1.mp4"></video>
+    <div class="yt-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/CEgBZ3QwGlo"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
 
