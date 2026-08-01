@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>URGENT ROYAL DECREE ⚔️</title>
+  <title> Your Majesty! I Have an Urgent Message 🐿️</title>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -153,6 +153,15 @@
       line-height: 1.6;
     }
 
+    .err-gif {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-top: 0.7rem;
+      display: block;
+    }
+
     .field { margin-bottom: 1.1rem; text-align: left; }
 
     .field label {
@@ -221,14 +230,13 @@
 
 <div class="scroll">
 
-  <p class="top-label">⚜ Official Kingdom Document ⚜</p>
+  <p class="top-label">⚜ The Royal Kingdom of Ingary ⚜</p>
   <h1 class="decree-title">⚔️ ROYAL DECREE ⚔️</h1>
 
   <hr class="divider" />
 
   <div class="messenger-wrap">
     <div class="messenger-circle" id="messenger-circle">
-     
       <img
         src="messenger.jpg"
         alt="Your Royal Knights Assistant"
@@ -238,7 +246,7 @@
     </div>
     <p class="messenger-caption">
       Your Royal Knights Assistant hath arrived<br />
-      (he knocked over 3 vases getting here and ate someone's lunch)
+      (He totally did not knock over 3 vases getting here and ate someone's lunch)
     </p>
   </div>
 
@@ -268,7 +276,7 @@
       Please appreciate his sacrifice.
     </p>
     <br />
-    <p>To gain entry to the Royal Chamber thou must first prove thy identity. The kingdom demands it.</p>
+    <p>To gain entry to the Royal Chamber thou must first prove thy worthiness to the throne. The Kingdom mandates it.</p>
   </div>
 
   <hr class="divider" />
@@ -281,12 +289,21 @@
       🚫 THE KINGDOM REJECTS THEE 🚫<br />
       <span style="font-size:0.78rem;">
         Thou hath entered the wrong answers. Your Royal Knights Assistant has informed the Knight.
-        He is currently pacing.
+        He will mail you the bill for wasting the Kingdoms computation.
       </span>
+      <video
+        class="err-gif"
+        id="err-gif"
+        src="Grand_Blue_GIF.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+      ></video>
     </div>
 
     <div class="field">
-      <label>⚔️ What doth Her Royal Highness consume with great and unwavering enthusiasm?</label>
+      <label>⚔️ What doth Her Royal Highness always crave for with great and unwavering enthusiasm?</label>
       <input type="text" id="inp-food" placeholder="Speak thy truth to the kingdom..." autocomplete="off" />
     </div>
 
@@ -301,43 +318,37 @@
   </div>
 
   <p class="footer-note">
-    Official Document of the Royal Knights Chamber 🏰<br />
+    Official Document written Her Majesty's Royal Knight<br />
     Unauthorised entry shall be met with great disappointment from Your Royal Knights Assistant.<br />
-    He will make a face. It will be devastating.
+    You have been warned and you are responsible if any of your food goes missing.
   </p>
 
 </div>
 
 <script>
-
-const FOOD_HASH = '8b3e67c5be6cb86e13708bb2a7bb5fc2b2dd940c60bdfdad5b36038625a6c215';
-const DOB_HASH  = '6f9d9f1a03fea3bbad21d4ef3646285cbb73e6999fad968a7efd58b1aeccda79';
-
-
-const sha = async s => {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-  return [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2, '0')).join('');
-};
+var _x=["8b3e67c5be6cb86e13708bb2a7bb5fc2b2dd940c60bdfdad5b36038625a6c215","6f9d9f1a03fea3bbad21d4ef3646285cbb73e6999fad968a7efd58b1aeccda79"];
+var _p=async t=>{var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(n=>n.toString(16).padStart(2,"0")).join("")};
 
 document.getElementById('btn-enter').addEventListener('click', async () => {
-  const food = document.getElementById('inp-food').value.trim().toLowerCase();
-  const dob  = document.getElementById('inp-dob').value;
-  const err  = document.getElementById('err');
-
-  const [fh, dh] = await Promise.all([sha(food), sha(dob)]);
-
-  if (fh === FOOD_HASH && dh === DOB_HASH) {
-    err.style.display = 'none';
-    sessionStorage.setItem('royal_access', 'granted');
-    window.location.href = 'gallery.html';
+  var a=document.getElementById('inp-food').value.trim().toLowerCase();
+  var b=document.getElementById('inp-dob').value;
+  var e=document.getElementById('err');
+  var g=document.getElementById('err-gif');
+  var r=await Promise.all([_p(a),_p(b)]);
+  if(r[0]===_x[0]&&r[1]===_x[1]){
+    e.style.display='none';
+    sessionStorage.setItem('royal_access','granted');
+    window.location.href='gallery.html';
   } else {
-    err.style.display = 'block';
+    e.style.display='block';
+    g.currentTime=0;
+    g.play();
   }
 });
 
-['inp-food', 'inp-dob'].forEach(id => {
-  document.getElementById(id).addEventListener('keypress', e => {
-    if (e.key === 'Enter') document.getElementById('btn-enter').click();
+['inp-food','inp-dob'].forEach(function(id){
+  document.getElementById(id).addEventListener('keypress',function(e){
+    if(e.key==='Enter')document.getElementById('btn-enter').click();
   });
 });
 </script>
