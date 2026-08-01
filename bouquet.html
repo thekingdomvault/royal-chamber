@@ -39,33 +39,114 @@
       z-index: 1;
     }
 
-    /* ── Header ── */
-    .page-header {
+    /* ── Sign Board (matches gallery) ── */
+    .sign-outer {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
 
-    .page-title {
-      font-size: clamp(1.6rem, 5vw, 2.2rem);
+    .sign-ropes {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4rem;
+      font-size: 1.4rem;
+      line-height: 1;
+      color: #8b6914;
+    }
+
+    .sign-board {
+      background: #1e0f07;
+      border: 4px solid #8b6914;
+      border-radius: 10px;
+      padding: 2rem 2rem;
+      box-shadow:
+        0 8px 28px rgba(0,0,0,0.45),
+        inset 0 0 40px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sign-board::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 40px,
+        rgba(255,255,255,0.015) 40px,
+        rgba(255,255,255,0.015) 41px
+      );
+    }
+
+    .sign-text {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
       font-weight: 700;
-      color: #4a1c00;
-      text-shadow: 2px 2px 0 rgba(139,105,20,0.25);
-      margin-bottom: 0.5rem;
+      color: #ffd700;
+      position: relative;
+      animation: signFlicker 5s infinite;
+      line-height: 1.3;
+    }
+
+    .sign-subtitle {
+      font-size: 0.85rem;
+      color: #c9a227;
+      margin-top: 0.5rem;
+      opacity: 0.7;
+      animation: signFlicker 5s infinite 0.3s;
+    }
+
+    @keyframes signFlicker {
+      0%, 17%, 19%, 22%, 52%, 56%, 100% {
+        text-shadow:
+          0 0 8px #ffd700,
+          0 0 18px #ffa500,
+          0 0 35px #ff6600,
+          0 0 60px #ff4400;
+        opacity: 1;
+      }
+      18%, 21%, 54% {
+        text-shadow: none;
+        opacity: 0.4;
+      }
+    }
+
+    /* ── Shared card ── */
+    .card {
+      background: #fdf6e3;
+      border: 4px double #8b6914;
+      border-radius: 10px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      position: relative;
+    }
+
+    .card::before { content: '⚜'; position: absolute; top: 0.5rem; left: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
+    .card::after  { content: '⚜'; position: absolute; bottom: 0.5rem; right: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
+
+    .divider {
+      border: none;
+      border-top: 2px double #8b6914;
+      margin: 1.2rem 0;
+    }
+
+    /* ── Intro card: cafe image + message ── */
+    .cafe-img {
+      width: 100%;
+      border-radius: 8px;
+      border: 3px solid #c9a227;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      display: block;
+      margin-bottom: 1.2rem;
     }
 
     .page-subtitle {
       font-size: 0.88rem;
       color: #7a5c1e;
       font-style: italic;
-      line-height: 1.7;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .divider {
-      border: none;
-      border-top: 3px double #8b6914;
-      margin: 1.2rem 0;
+      line-height: 1.8;
+      text-align: center;
     }
 
     /* ── Bouquet grid ── */
@@ -85,7 +166,7 @@
       position: relative;
     }
 
-    .bouquet-card::before { content: '⚜'; position: absolute; top: 0.4rem; left: 0.6rem; font-size: 0.9rem; color: #8b6914; opacity: 0.5; }
+    .bouquet-card::before { content: '⚜'; position: absolute; top: 0.4rem; left: 0.6rem; font-size: 0.9rem; color: #8b6914; opacity: 0.5; z-index: 1; }
     .bouquet-card::after  { content: '⚜'; position: absolute; bottom: 0.4rem; right: 0.6rem; font-size: 0.9rem; color: #8b6914; opacity: 0.5; }
 
     .bouquet-card:hover {
@@ -98,18 +179,6 @@
       aspect-ratio: 4 / 3;
       object-fit: cover;
       display: block;
-      border-bottom: 3px double #8b6914;
-    }
-
-    /* Emoji fallback if no image */
-    .bouquet-emoji-placeholder {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      background: linear-gradient(135deg, #d4edda, #c8e6c9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
       border-bottom: 3px double #8b6914;
     }
 
@@ -174,7 +243,8 @@
 
     @media (max-width: 500px) {
       .bouquet-grid { grid-template-columns: 1fr; }
-      .page-title { font-size: 1.5rem; }
+      .sign-text { font-size: 1.5rem; }
+      .sign-ropes { padding: 0 2.5rem; }
     }
   </style>
 </head>
@@ -189,22 +259,38 @@
 
 <div class="page-wrap">
 
-  <div class="page-header">
-    <h1 class="page-title">💐 Pick Your Bouquet 💐</h1>
+  <!-- ── SIGN BOARD ── -->
+  <div class="sign-outer">
+    <div class="sign-ropes">
+      <span>🪢</span><span>🪢</span>
+    </div>
+    <div class="sign-board">
+      <h1 class="sign-text">💐 Pick Your Bouquet 💐</h1>
+      <p class="sign-subtitle">👑 The Royal Knight's Finest Arrangements for Her Highness 👑</p>
+    </div>
+  </div>
+
+  <!-- ── CAFE IMAGE + INTRO MESSAGE ── -->
+  <div class="card">
+    <img class="cafe-img" src="cafe.jpg" alt="A royal portrait" />
     <hr class="divider" />
     <p class="page-subtitle">
-      Since Her Highness is more of a foodie than a flower person,<br />
-      the Royal Knight presents these fine arrangements — each one handpicked<br />
-      from the finest kingdom gardens and ready to be cooked into something magnificent. 👑
+      The art of giving flowers is a simple, timeless gesture and a little way of saying
+      I was out here in the world and thought of you for a second. No occasion needed,
+      no grand reason required. Just something bright and alive, handed from one person to another.
+      <br /><br />
+      Since Her Highness is more of a foodie than a flower girl,
+      the Royal Knight presents these fine arrangements he handpicked himself for her majesty
+      from the finest kingdom gardens and ready to be cooked into something magnificent 😋
     </p>
   </div>
 
+  <!-- ── BOUQUET GRID ── -->
   <div class="bouquet-grid">
 
     <!-- CILANTRO -->
     <div class="bouquet-card">
-      <div class="bouquet-emoji-placeholder">🌿</div>
-      <!-- Swap above div with: <img class="bouquet-img" src="cilantro.jpg" alt="Cilantro Bouquet"> -->
+      <img class="bouquet-img" src="cilantro.jpg" alt="Cilantro Bouquet" />
       <div class="bouquet-body">
         <div class="bouquet-name">The Cilantro Bouquet</div>
         <span class="bouquet-tag">Royal Favourite</span>
@@ -219,8 +305,7 @@
 
     <!-- PUDINA / MINT -->
     <div class="bouquet-card">
-      <div class="bouquet-emoji-placeholder">🌱</div>
-      <!-- Swap above div with: <img class="bouquet-img" src="pudina.jpg" alt="Pudina Bouquet"> -->
+      <img class="bouquet-img" src="pudina.jpg" alt="Pudina Bouquet" />
       <div class="bouquet-body">
         <div class="bouquet-name">The Pudina Bouquet</div>
         <span class="bouquet-tag">Refreshingly Royal</span>
@@ -235,8 +320,7 @@
 
     <!-- CARROT -->
     <div class="bouquet-card">
-      <div class="bouquet-emoji-placeholder">🥕</div>
-      <!-- Swap above div with: <img class="bouquet-img" src="carrot.jpg" alt="Carrot Bouquet"> -->
+      <img class="bouquet-img" src="carrot.jpg" alt="Carrot Bouquet" />
       <div class="bouquet-body">
         <div class="bouquet-name">The Carrot Bouquet</div>
         <span class="bouquet-tag">Underrated Royalty</span>
@@ -251,8 +335,7 @@
 
     <!-- CURRY LEAVES -->
     <div class="bouquet-card">
-      <div class="bouquet-emoji-placeholder">🍃</div>
-      <!-- Swap above div with: <img class="bouquet-img" src="curry_leaves.jpg" alt="Curry Leaves Bouquet"> -->
+      <img class="bouquet-img" src="curry_leaves.jpg" alt="Curry Leaves Bouquet" />
       <div class="bouquet-body">
         <div class="bouquet-name">The Curry Leaf Bouquet</div>
         <span class="bouquet-tag">The Silent Powerhouse</span>
@@ -267,8 +350,7 @@
 
     <!-- GREEN CHILLI -->
     <div class="bouquet-card">
-      <div class="bouquet-emoji-placeholder">🌶️</div>
-      <!-- Swap above div with: <img class="bouquet-img" src="green_chilli.jpg" alt="Green Chilli Bouquet"> -->
+      <img class="bouquet-img" src="green_chilli.jpg" alt="Green Chilli Bouquet" />
       <div class="bouquet-body">
         <div class="bouquet-name">The Green Chilli Bouquet</div>
         <span class="bouquet-tag">For the Bold Palate</span>
@@ -283,8 +365,7 @@
 
     <!-- METHI -->
     <div class="bouquet-card">
-      <div class="bouquet-emoji-placeholder">🌾</div>
-      <!-- Swap above div with: <img class="bouquet-img" src="methi.jpg" alt="Methi Bouquet"> -->
+      <img class="bouquet-img" src="methi.jpg" alt="Methi Bouquet" />
       <div class="bouquet-body">
         <div class="bouquet-name">The Methi Bouquet</div>
         <span class="bouquet-tag">Acquired Taste, Royal Status</span>
