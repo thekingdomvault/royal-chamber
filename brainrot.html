@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Royal Brainrot Chronicles 🧠</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background-color: #e8d5a3;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(180,140,70,0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(160,120,50,0.2) 0%, transparent 50%);
+      font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+      overflow-x: hidden;
+    }
+
+    .deco {
+      position: fixed;
+      font-size: 2.2rem;
+      opacity: 0.13;
+      user-select: none;
+      pointer-events: none;
+      animation: floaty 6s ease-in-out infinite;
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(var(--r)); }
+      50%       { transform: translateY(-14px) rotate(calc(var(--r) + 10deg)); }
+    }
+
+    .page-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .page-title {
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      font-weight: 700;
+      color: #4a1c00;
+      text-shadow: 2px 2px 0 rgba(139,105,20,0.25);
+      margin-bottom: 0.5rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 3px double #8b6914;
+      margin: 1.2rem 0;
+    }
+
+    /* ── Story card ── */
+    .story-card {
+      background: #fdf6e3;
+      border: 4px double #8b6914;
+      border-radius: 10px;
+      padding: 1.8rem;
+      margin-bottom: 1.6rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      position: relative;
+    }
+
+    .story-card::before { content: '⚜'; position: absolute; top: 0.5rem; left: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
+    .story-card::after  { content: '⚜'; position: absolute; bottom: 0.5rem; right: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
+
+    .story-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #4a1c00;
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+
+    .story-body {
+      font-size: 0.93rem;
+      color: #3d2800;
+      line-height: 1.95;
+      white-space: pre-line;
+    }
+
+    /* ── Placeholder state ── */
+    .coming-soon {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: #fdf6e3;
+      border: 4px double #8b6914;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      margin-bottom: 2rem;
+    }
+
+    .coming-soon .cs-emoji { font-size: 3.5rem; margin-bottom: 1rem; }
+
+    .coming-soon p {
+      font-size: 0.93rem;
+      color: #5a3a10;
+      line-height: 1.8;
+    }
+
+    .coming-soon .cs-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #4a1c00;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── Back button ── */
+    .back-btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      padding: 0.7rem 1.4rem;
+      background: #8b0000;
+      border: 3px solid #5a0000;
+      border-radius: 8px;
+      color: #fdf6e3;
+      font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 4px 0 #5a0000;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .back-btn:hover { background: #a00000; transform: translateY(-2px); }
+    .back-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #5a0000; }
+  </style>
+</head>
+<body>
+
+<div class="deco" style="top:4%;left:2%;--r:-15deg;animation-delay:0s;">🧠</div>
+<div class="deco" style="top:8%;right:4%;--r:20deg;animation-delay:1s;">📜</div>
+<div class="deco" style="top:42%;left:1%;--r:-8deg;animation-delay:2s;">🤡</div>
+<div class="deco" style="top:55%;right:2%;--r:12deg;animation-delay:0.5s;">📖</div>
+<div class="deco" style="bottom:12%;left:3%;--r:22deg;animation-delay:1.5s;">🧠</div>
+<div class="deco" style="bottom:4%;right:6%;--r:-18deg;animation-delay:2.5s;">📜</div>
+
+<div class="page-wrap">
+
+  <div class="page-header">
+    <h1 class="page-title">🧠 Royal Brainrot Chronicles 🧠</h1>
+    <hr class="divider" />
+  </div>
+
+  <!--
+    TO ADD A STORY:
+    Copy the block below, uncomment it, and fill in the title and story text.
+    Add as many as you want, they'll stack nicely.
+
+    <div class="story-card">
+      <p class="story-title">📜 Story Title Here</p>
+      <hr style="border:none;border-top:1px dashed #c9a227;margin:0.8rem 0;" />
+      <p class="story-body">Your story goes here.
+
+You can write multiple paragraphs.
+Just leave a blank line between them.</p>
+    </div>
+  -->
+
+  <div class="coming-soon">
+    <div class="cs-emoji">📜</div>
+    <p class="cs-title">The Royal Scribe is Still Writing</p>
+    <p>
+      The Royal Knight is currently suffering from a severe case of brainrot<br />
+      and is working hard to transcribe the chronicles into readable form.<br /><br />
+      Check back soon, Your Highness.<br />
+      Your Royal Knights Assistant is supervising the process.<br />
+      He has already eaten two quills and one inkwell.
+    </p>
+  </div>
+
+  <a href="gallery.html" class="back-btn">⬅ Return to the Royal Chamber</a>
+
+</div>
+
+<script>
+  if (sessionStorage.getItem('royal_access') !== 'granted') {
+    window.location.href = 'index.html';
+  }
+</script>
+</body>
+</html>
