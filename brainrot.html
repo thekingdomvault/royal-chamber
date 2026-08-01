@@ -39,85 +39,188 @@
       z-index: 1;
     }
 
-    .page-header {
+    /* ── Sign Board ── */
+    .sign-outer {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
 
-    .page-title {
-      font-size: clamp(1.6rem, 5vw, 2.2rem);
+    .sign-ropes {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4rem;
+      font-size: 1.4rem;
+      line-height: 1;
+      color: #8b6914;
+    }
+
+    .sign-board {
+      background: #1e0f07;
+      border: 4px solid #8b6914;
+      border-radius: 10px;
+      padding: 2rem 2rem;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.45), inset 0 0 40px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sign-board::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg, transparent 0px, transparent 40px,
+        rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px
+      );
+    }
+
+    .sign-text {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
       font-weight: 700;
-      color: #4a1c00;
-      text-shadow: 2px 2px 0 rgba(139,105,20,0.25);
-      margin-bottom: 0.5rem;
+      color: #ffd700;
+      position: relative;
+      animation: signFlicker 5s infinite;
+      line-height: 1.3;
     }
 
-    .divider {
-      border: none;
-      border-top: 3px double #8b6914;
-      margin: 1.2rem 0;
+    .sign-subtitle {
+      font-size: 0.85rem;
+      color: #c9a227;
+      margin-top: 0.5rem;
+      opacity: 0.7;
+      animation: signFlicker 5s infinite 0.3s;
     }
 
-    /* ── Story card ── */
-    .story-card {
+    @keyframes signFlicker {
+      0%, 17%, 19%, 22%, 52%, 56%, 100% {
+        text-shadow: 0 0 8px #ffd700, 0 0 18px #ffa500, 0 0 35px #ff6600, 0 0 60px #ff4400;
+        opacity: 1;
+      }
+      18%, 21%, 54% { text-shadow: none; opacity: 0.4; }
+    }
+
+    /* ── Card ── */
+    .card {
       background: #fdf6e3;
       border: 4px double #8b6914;
       border-radius: 10px;
       padding: 1.8rem;
-      margin-bottom: 1.6rem;
+      margin-bottom: 2rem;
       box-shadow: 0 4px 16px rgba(0,0,0,0.18);
       position: relative;
     }
 
-    .story-card::before { content: '⚜'; position: absolute; top: 0.5rem; left: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
-    .story-card::after  { content: '⚜'; position: absolute; bottom: 0.5rem; right: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
+    .card::before { content: '⚜'; position: absolute; top: 0.5rem; left: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
+    .card::after  { content: '⚜'; position: absolute; bottom: 0.5rem; right: 0.7rem; font-size: 1rem; color: #8b6914; opacity: 0.6; }
 
-    .story-title {
-      font-size: 1.05rem;
+    .section-title {
+      font-size: 1.1rem;
       font-weight: 700;
       color: #4a1c00;
-      margin-bottom: 0.8rem;
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 2px double #8b6914;
+      margin: 1rem 0;
+    }
+
+    /* ── Swipeable Story ── */
+    .story-outer {
+      position: relative;
+    }
+
+    .story-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0;
+      border-radius: 8px;
+    }
+
+    .story-track::-webkit-scrollbar { display: none; }
+
+    .story-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .story-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px 8px 0 0;
+      border: 3px solid #c9a227;
+      border-bottom: none;
+    }
+
+    .story-caption {
+      background: #1e0f07;
+      border: 3px solid #c9a227;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1rem 1.2rem;
       text-align: center;
     }
 
-    .story-body {
-      font-size: 0.93rem;
-      color: #3d2800;
-      line-height: 1.95;
-      white-space: pre-line;
+    .story-caption .slide-num {
+      font-size: 0.7rem;
+      color: #c9a227;
+      opacity: 0.6;
+      margin-bottom: 0.3rem;
+      letter-spacing: 1px;
     }
 
-    /* ── Placeholder state ── */
-    .coming-soon {
+    .story-caption p {
+      font-size: 0.92rem;
+      color: #fdf6e3;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    /* Dot indicators */
+    .story-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c9a227;
+      opacity: 0.35;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .dot.active {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    /* Swipe hint */
+    .swipe-hint {
       text-align: center;
-      padding: 3rem 1.5rem;
-      background: #fdf6e3;
-      border: 4px double #8b6914;
-      border-radius: 10px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-      margin-bottom: 2rem;
-    }
-
-    .coming-soon .cs-emoji { font-size: 3.5rem; margin-bottom: 1rem; }
-
-    .coming-soon p {
-      font-size: 0.93rem;
-      color: #5a3a10;
-      line-height: 1.8;
-    }
-
-    .coming-soon .cs-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #4a1c00;
-      margin-bottom: 0.6rem;
+      font-size: 0.75rem;
+      color: #7a5c1e;
+      font-style: italic;
+      margin-top: 0.6rem;
     }
 
     /* ── Back button ── */
     .back-btn {
       display: block;
       width: fit-content;
-      margin: 0 auto;
+      margin: 0 auto 2rem;
       padding: 0.7rem 1.4rem;
       background: #8b0000;
       border: 3px solid #5a0000;
@@ -133,49 +236,83 @@
     }
     .back-btn:hover { background: #a00000; transform: translateY(-2px); }
     .back-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #5a0000; }
+
+    @media (max-width: 500px) {
+      .sign-text { font-size: 1.5rem; }
+      .sign-ropes { padding: 0 2.5rem; }
+    }
   </style>
 </head>
 <body>
 
 <div class="deco" style="top:4%;left:2%;--r:-15deg;animation-delay:0s;">🧠</div>
 <div class="deco" style="top:8%;right:4%;--r:20deg;animation-delay:1s;">📜</div>
-<div class="deco" style="top:42%;left:1%;--r:-8deg;animation-delay:2s;">🤡</div>
-<div class="deco" style="top:55%;right:2%;--r:12deg;animation-delay:0.5s;">📖</div>
+<div class="deco" style="top:42%;left:1%;--r:-8deg;animation-delay:2s;">🐱</div>
+<div class="deco" style="top:55%;right:2%;--r:12deg;animation-delay:0.5s;">😨</div>
 <div class="deco" style="bottom:12%;left:3%;--r:22deg;animation-delay:1.5s;">🧠</div>
 <div class="deco" style="bottom:4%;right:6%;--r:-18deg;animation-delay:2.5s;">📜</div>
 
 <div class="page-wrap">
 
-  <div class="page-header">
-    <h1 class="page-title">🧠 Royal Brainrot Chronicles 🧠</h1>
-    <hr class="divider" />
+  <div class="sign-outer">
+    <div class="sign-ropes">
+      <span>🪢</span><span>🪢</span>
+    </div>
+    <div class="sign-board">
+      <h1 class="sign-text">🧠 Royal Brainrot Chronicles 🧠</h1>
+      <p class="sign-subtitle">The Royal Archives of Questionable Literature</p>
+    </div>
   </div>
 
-  <!--
-    TO ADD A STORY:
-    Copy the block below, uncomment it, and fill in the title and story text.
-    Add as many as you want, they'll stack nicely.
+  <!-- ── STORY SECTION ── -->
+  <div class="card">
+    <p class="section-title">😨 What the Royal Knight is Scared Might Happen One of These Days 😨</p>
+    <hr class="divider" />
+    <div class="story-outer">
+      <div class="story-track" id="storyTrack">
 
-    <div class="story-card">
-      <p class="story-title">📜 Story Title Here</p>
-      <hr style="border:none;border-top:1px dashed #c9a227;margin:0.8rem 0;" />
-      <p class="story-body">Your story goes here.
+        <div class="story-slide">
+          <img src="cat1.jpg" alt="Scene 1" />
+          <div class="story-caption">
+            <p class="slide-num">SCENE I</p>
+            <p>It was 2am. She was in bed. Minding her business. Totally unbothered. 🌙</p>
+          </div>
+        </div>
 
-You can write multiple paragraphs.
-Just leave a blank line between them.</p>
+        <div class="story-slide">
+          <img src="cat2.jpg" alt="Scene 2" />
+          <div class="story-caption">
+            <p class="slide-num">SCENE II</p>
+            <p>Meanwhile. He was out. At the club. Surrounded by Monsters. As per usual. 🥤</p>
+          </div>
+        </div>
+
+        <div class="story-slide">
+          <img src="cat3.jpg" alt="Scene 3" />
+          <div class="story-caption">
+            <p class="slide-num">SCENE III</p>
+            <p>Then he FaceTimed. From the club. At 2am. She answered. She always does. 📱</p>
+          </div>
+        </div>
+
+        <div class="story-slide">
+          <img src="cat4.jpg" alt="Scene 4" />
+          <div class="story-caption">
+            <p class="slide-num">SCENE IV</p>
+            <p>She showed up. Dragged him out. Right in front of the VIP entrance. He still had his Monster. Zero remorse from either party. 👑</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="story-dots">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+        <div class="dot" onclick="goToSlide(3)"></div>
+      </div>
+      <p class="swipe-hint">← swipe to read →</p>
     </div>
-  -->
-
-  <div class="coming-soon">
-    <div class="cs-emoji">📜</div>
-    <p class="cs-title">The Royal Scribe is Still Writing</p>
-    <p>
-      The Royal Knight is currently suffering from a severe case of brainrot<br />
-      and is working hard to transcribe the chronicles into readable form.<br /><br />
-      Check back soon, Your Highness.<br />
-      Your Royal Knights Assistant is supervising the process.<br />
-      He has already eaten two quills and one inkwell.
-    </p>
   </div>
 
   <a href="gallery.html" class="back-btn">⬅ Return to the Royal Chamber</a>
@@ -186,6 +323,20 @@ Just leave a blank line between them.</p>
   if (sessionStorage.getItem('royal_access') !== 'granted') {
     window.location.href = 'index.html';
   }
+
+  const track = document.getElementById('storyTrack');
+  const dots = document.querySelectorAll('.dot');
+
+  function goToSlide(index) {
+    track.scrollTo({ left: track.clientWidth * index, behavior: 'smooth' });
+  }
+
+  function updateDots() {
+    const index = Math.round(track.scrollLeft / track.clientWidth);
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  track.addEventListener('scroll', updateDots);
 </script>
 </body>
 </html>
