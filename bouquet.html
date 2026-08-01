@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pick Your Bouquet 💐</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background-color: #e8d5a3;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(180,140,70,0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(160,120,50,0.2) 0%, transparent 50%);
+      font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+      overflow-x: hidden;
+    }
+
+    .deco {
+      position: fixed;
+      font-size: 2.2rem;
+      opacity: 0.13;
+      user-select: none;
+      pointer-events: none;
+      animation: floaty 6s ease-in-out infinite;
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(var(--r)); }
+      50%       { transform: translateY(-14px) rotate(calc(var(--r) + 10deg)); }
+    }
+
+    .page-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .page-title {
+      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      font-weight: 700;
+      color: #4a1c00;
+      text-shadow: 2px 2px 0 rgba(139,105,20,0.25);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      font-size: 0.88rem;
+      color: #7a5c1e;
+      font-style: italic;
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .divider {
+      border: none;
+      border-top: 3px double #8b6914;
+      margin: 1.2rem 0;
+    }
+
+    /* ── Bouquet grid ── */
+    .bouquet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .bouquet-card {
+      background: #fdf6e3;
+      border: 4px double #8b6914;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .bouquet-card::before { content: '⚜'; position: absolute; top: 0.4rem; left: 0.6rem; font-size: 0.9rem; color: #8b6914; opacity: 0.5; }
+    .bouquet-card::after  { content: '⚜'; position: absolute; bottom: 0.4rem; right: 0.6rem; font-size: 0.9rem; color: #8b6914; opacity: 0.5; }
+
+    .bouquet-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    }
+
+    .bouquet-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      border-bottom: 3px double #8b6914;
+    }
+
+    /* Emoji fallback if no image */
+    .bouquet-emoji-placeholder {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #d4edda, #c8e6c9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      border-bottom: 3px double #8b6914;
+    }
+
+    .bouquet-body {
+      padding: 1rem 1.2rem 1.4rem;
+    }
+
+    .bouquet-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #4a1c00;
+      margin-bottom: 0.3rem;
+    }
+
+    .bouquet-tag {
+      display: inline-block;
+      background: #8b0000;
+      color: #fdf6e3;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.5px;
+    }
+
+    .bouquet-desc {
+      font-size: 0.83rem;
+      color: #5a3a10;
+      line-height: 1.75;
+    }
+
+    .bouquet-dishes {
+      margin-top: 0.6rem;
+      padding-top: 0.6rem;
+      border-top: 1px dashed #c9a227;
+      font-size: 0.78rem;
+      color: #7a5c1e;
+      font-style: italic;
+    }
+
+    /* ── Back button ── */
+    .back-btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 2rem;
+      padding: 0.7rem 1.4rem;
+      background: #8b0000;
+      border: 3px solid #5a0000;
+      border-radius: 8px;
+      color: #fdf6e3;
+      font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 4px 0 #5a0000;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .back-btn:hover { background: #a00000; transform: translateY(-2px); }
+    .back-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #5a0000; }
+
+    @media (max-width: 500px) {
+      .bouquet-grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deco" style="top:4%;left:2%;--r:-15deg;animation-delay:0s;">🥕</div>
+<div class="deco" style="top:8%;right:4%;--r:20deg;animation-delay:1s;">🌿</div>
+<div class="deco" style="top:42%;left:1%;--r:-8deg;animation-delay:2s;">🌱</div>
+<div class="deco" style="top:55%;right:2%;--r:12deg;animation-delay:0.5s;">💐</div>
+<div class="deco" style="bottom:12%;left:3%;--r:22deg;animation-delay:1.5s;">🥦</div>
+<div class="deco" style="bottom:4%;right:6%;--r:-18deg;animation-delay:2.5s;">🌿</div>
+
+<div class="page-wrap">
+
+  <div class="page-header">
+    <h1 class="page-title">💐 Pick Your Bouquet 💐</h1>
+    <hr class="divider" />
+    <p class="page-subtitle">
+      Since Her Highness is more of a foodie than a flower person,<br />
+      the Royal Knight presents these fine arrangements — each one handpicked<br />
+      from the finest kingdom gardens and ready to be cooked into something magnificent. 👑
+    </p>
+  </div>
+
+  <div class="bouquet-grid">
+
+    <!-- CILANTRO -->
+    <div class="bouquet-card">
+      <div class="bouquet-emoji-placeholder">🌿</div>
+      <!-- Swap above div with: <img class="bouquet-img" src="cilantro.jpg" alt="Cilantro Bouquet"> -->
+      <div class="bouquet-body">
+        <div class="bouquet-name">The Cilantro Bouquet</div>
+        <span class="bouquet-tag">Royal Favourite</span>
+        <p class="bouquet-desc">
+          The humble hero that elevates every dish it touches. No Indian kitchen is complete without this green blessing.
+        </p>
+        <p class="bouquet-dishes">
+          🍛 Dal tadka &nbsp;·&nbsp; 🥘 Chicken curry &nbsp;·&nbsp; 🫙 Green chutney &nbsp;·&nbsp; 🍚 Biryani garnish
+        </p>
+      </div>
+    </div>
+
+    <!-- PUDINA / MINT -->
+    <div class="bouquet-card">
+      <div class="bouquet-emoji-placeholder">🌱</div>
+      <!-- Swap above div with: <img class="bouquet-img" src="pudina.jpg" alt="Pudina Bouquet"> -->
+      <div class="bouquet-body">
+        <div class="bouquet-name">The Pudina Bouquet</div>
+        <span class="bouquet-tag">Refreshingly Royal</span>
+        <p class="bouquet-desc">
+          The cool, refreshing royalty of the herb world. One sniff and you feel like you've just won a battle.
+        </p>
+        <p class="bouquet-dishes">
+          🥗 Pudina raita &nbsp;·&nbsp; 🫙 Mint chutney &nbsp;·&nbsp; 🍖 Seekh kebab marinade &nbsp;·&nbsp; 🥤 Jaljeera
+        </p>
+      </div>
+    </div>
+
+    <!-- CARROT -->
+    <div class="bouquet-card">
+      <div class="bouquet-emoji-placeholder">🥕</div>
+      <!-- Swap above div with: <img class="bouquet-img" src="carrot.jpg" alt="Carrot Bouquet"> -->
+      <div class="bouquet-body">
+        <div class="bouquet-name">The Carrot Bouquet</div>
+        <span class="bouquet-tag">Underrated Royalty</span>
+        <p class="bouquet-desc">
+          Bold, orange, and deeply misunderstood. The carrot bouquet is for the true connoisseur who knows dessert can also be a vegetable.
+        </p>
+        <p class="bouquet-dishes">
+          🍮 Gajar ka halwa &nbsp;·&nbsp; 🥕 Gajar achar &nbsp;·&nbsp; 🥣 Carrot soup &nbsp;·&nbsp; 🥗 Salads
+        </p>
+      </div>
+    </div>
+
+    <!-- CURRY LEAVES -->
+    <div class="bouquet-card">
+      <div class="bouquet-emoji-placeholder">🍃</div>
+      <!-- Swap above div with: <img class="bouquet-img" src="curry_leaves.jpg" alt="Curry Leaves Bouquet"> -->
+      <div class="bouquet-body">
+        <div class="bouquet-name">The Curry Leaf Bouquet</div>
+        <span class="bouquet-tag">The Silent Powerhouse</span>
+        <p class="bouquet-desc">
+          Always present, rarely celebrated. These little leaves are the secret behind why South Indian food hits different every single time.
+        </p>
+        <p class="bouquet-dishes">
+          🍳 Tadka dal &nbsp;·&nbsp; 🍚 Coconut rice &nbsp;·&nbsp; 🦐 Prawn curry &nbsp;·&nbsp; 🥞 Pesarattu
+        </p>
+      </div>
+    </div>
+
+    <!-- GREEN CHILLI -->
+    <div class="bouquet-card">
+      <div class="bouquet-emoji-placeholder">🌶️</div>
+      <!-- Swap above div with: <img class="bouquet-img" src="green_chilli.jpg" alt="Green Chilli Bouquet"> -->
+      <div class="bouquet-body">
+        <div class="bouquet-name">The Green Chilli Bouquet</div>
+        <span class="bouquet-tag">For the Bold Palate</span>
+        <p class="bouquet-desc">
+          This bouquet is not for the faint of heart. A gift for those who believe every meal needs a little heat and a lot of drama.
+        </p>
+        <p class="bouquet-dishes">
+          🍳 Mirchi ka salan &nbsp;·&nbsp; 🥘 Sabzi tadka &nbsp;·&nbsp; 🫙 Thecha chutney &nbsp;·&nbsp; 🍢 Stuffed mirchi
+        </p>
+      </div>
+    </div>
+
+    <!-- METHI -->
+    <div class="bouquet-card">
+      <div class="bouquet-emoji-placeholder">🌾</div>
+      <!-- Swap above div with: <img class="bouquet-img" src="methi.jpg" alt="Methi Bouquet"> -->
+      <div class="bouquet-body">
+        <div class="bouquet-name">The Methi Bouquet</div>
+        <span class="bouquet-tag">Acquired Taste, Royal Status</span>
+        <p class="bouquet-desc">
+          Slightly bitter, deeply nutritious, and absolutely iconic. Choosing this bouquet means Her Highness has refined taste and zero time for mediocrity.
+        </p>
+        <p class="bouquet-dishes">
+          🫓 Methi thepla &nbsp;·&nbsp; 🍛 Methi dal &nbsp;·&nbsp; 🥩 Methi chicken &nbsp;·&nbsp; 🥙 Methi paratha
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <br />
+  <a href="gallery.html" class="back-btn">⬅ Return to the Royal Chamber</a>
+
+</div>
+
+<script>
+  if (sessionStorage.getItem('royal_access') !== 'granted') {
+    window.location.href = 'index.html';
+  }
+</script>
+</body>
+</html>
