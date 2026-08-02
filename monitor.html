@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚔️ Knight's Command Center</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: #0e0a04;
+      font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+      color: #fdf6e3;
+    }
+
+    #gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .gate-box {
+      background: #1e0f07;
+      border: 4px double #8b6914;
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+
+    .gate-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffd700;
+      margin-bottom: 0.4rem;
+    }
+
+    .gate-sub {
+      font-size: 0.8rem;
+      color: #c9a227;
+      opacity: 0.7;
+      margin-bottom: 1.8rem;
+    }
+
+    .gate-box input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: #2a1508;
+      border: 2px solid #8b6914;
+      border-radius: 8px;
+      color: #fdf6e3;
+      font-family: 'Comic Neue', cursive;
+      font-size: 0.95rem;
+      outline: none;
+      margin-bottom: 1rem;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .gate-box input:focus { border-color: #ffd700; }
+
+    .gate-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: #8b0000;
+      border: 3px solid #5a0000;
+      border-radius: 8px;
+      color: #fdf6e3;
+      font-family: 'Comic Neue', cursive;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #5a0000;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .gate-btn:hover { background: #a00000; }
+    .gate-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #5a0000; }
+
+    .gate-err {
+      display: none;
+      font-size: 0.8rem;
+      color: #e88;
+      margin-top: 0.8rem;
+    }
+
+    #dashboard { display: none; padding: 2rem 1.5rem 5rem; max-width: 720px; margin: 0 auto; }
+
+    .dash-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 2px double #8b6914;
+    }
+
+    .dash-title {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 700;
+      color: #ffd700;
+      text-shadow: 0 0 12px rgba(255,215,0,0.4);
+    }
+
+    .dash-sub { font-size: 0.8rem; color: #c9a227; opacity: 0.7; margin-top: 0.4rem; }
+
+    .panel {
+      background: #1e0f07;
+      border: 3px double #8b6914;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffd700;
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid #3a2010;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .stat-box {
+      background: #1e0f07;
+      border: 2px solid #8b6914;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-num.success { color: #4caf50; }
+    .stat-num.failed  { color: #e57373; }
+    .stat-num.total   { color: #ffd700; }
+
+    .stat-label { font-size: 0.72rem; color: #c9a227; opacity: 0.7; }
+
+    .event-list { display: flex; flex-direction: column; gap: 0.6rem; max-height: 420px; overflow-y: auto; }
+
+    .event-list::-webkit-scrollbar { width: 4px; }
+    .event-list::-webkit-scrollbar-track { background: #1e0f07; }
+    .event-list::-webkit-scrollbar-thumb { background: #8b6914; border-radius: 2px; }
+
+    .event-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.6rem 0.8rem;
+      background: #2a1508;
+      border-radius: 6px;
+      border-left: 3px solid transparent;
+      font-size: 0.82rem;
+    }
+
+    .event-item.success { border-left-color: #4caf50; }
+    .event-item.failed  { border-left-color: #e57373; }
+
+    .event-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .event-badge.success { background: rgba(76,175,80,0.2); color: #4caf50; }
+    .event-badge.failed  { background: rgba(229,115,115,0.2); color: #e57373; }
+
+    .event-time { color: #c9a227; opacity: 0.8; margin-left: auto; white-space: nowrap; font-size: 0.75rem; }
+
+    .no-events { font-size: 0.82rem; color: #8b6914; font-style: italic; text-align: center; padding: 1.5rem 0; opacity: 0.7; }
+
+    .action-btn {
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 8px;
+      font-family: 'Comic Neue', cursive;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 0.8rem;
+    }
+
+    .action-btn.danger {
+      background: #8b0000;
+      border: 3px solid #5a0000;
+      color: #fdf6e3;
+      box-shadow: 0 4px 0 #5a0000;
+    }
+    .action-btn.danger:hover { background: #a00000; }
+    .action-btn.danger:active { transform: translateY(2px); box-shadow: 0 2px 0 #5a0000; }
+
+    .action-btn.warning {
+      background: transparent;
+      border: 2px dashed #8b6914;
+      color: #c9a227;
+    }
+    .action-btn.warning:hover { background: rgba(139,105,20,0.15); }
+
+    .action-note { font-size: 0.72rem; color: #8b6914; opacity: 0.7; text-align: center; margin-top: 0.3rem; }
+
+    .loading-msg { font-size: 0.82rem; color: #8b6914; font-style: italic; text-align: center; padding: 1rem 0; opacity: 0.7; }
+  </style>
+</head>
+<body>
+
+<!-- ── GATE ── -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-title">⚔️ Knight's Command Center</div>
+    <div class="gate-sub">Authorised personnel only. You know who you are.</div>
+    <input type="password" id="gateInput" placeholder="Enter access code" />
+    <button class="gate-btn" id="gateBtn">ENTER</button>
+    <div class="gate-err" id="gateErr">🚫 Wrong code. Nice try though.</div>
+  </div>
+</div>
+
+<div id="dashboard">
+
+  <div class="dash-header">
+    <div class="dash-title">⚔️ Knight's Command Center ⚔️</div>
+    <div class="dash-sub">Royal Kingdom of Ingary — Internal Operations</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num success" id="statSuccess">—</div>
+      <div class="stat-label">Successful Logins</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num failed" id="statFailed">—</div>
+      <div class="stat-label">Failed Attempts</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num total" id="statTotal">—</div>
+      <div class="stat-label">Total Attempts</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">🔐 Login Activity — Most Recent First</div>
+    <div class="event-list" id="eventList">
+      <p class="loading-msg">Loading events...</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">🗑 Royal Records Management</div>
+    <button class="action-btn danger" id="clearDecreesBtn">📜 Clear All Royal Decrees (Complaint Board)</button>
+    <p class="action-note">This wipes all test posts from the Royal Decree Board. Use before sharing the site so it's clean for Her Highness.</p>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+  const MONITOR_HASH = 'b6af117ba22ce28c50b451a878cf7dd691c6aed4b6fe2941e8c766bc21083515';
+
+  const _p = async t => {
+    const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+    return [...new Uint8Array(b)].map(n => n.toString(16).padStart(2,'0')).join('');
+  };
+
+  document.getElementById('gateBtn').addEventListener('click', async () => {
+    const val = document.getElementById('gateInput').value;
+    const hash = await _p(val);
+    if (hash === MONITOR_HASH) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      initDashboard();
+    } else {
+      document.getElementById('gateErr').style.display = 'block';
+    }
+  });
+
+  document.getElementById('gateInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('gateBtn').click();
+  });
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDocP3TO9eg0Yoy-aXwAQRBv_QlE25RZ6c",
+    authDomain: "royal-kingdom-50d8c.firebaseapp.com",
+    projectId: "royal-kingdom-50d8c",
+    storageBucket: "royal-kingdom-50d8c.firebasestorage.app",
+    messagingSenderId: "540788881512",
+    appId: "1:540788881512:web:1278037fc8b2f35458e3dd"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  function formatDate(ts) {
+    if (!ts) return '...';
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+      + ' · ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  function initDashboard() {
+    db.collection('login_events').orderBy('ts', 'desc').onSnapshot(snapshot => {
+      const list = document.getElementById('eventList');
+      let success = 0, failed = 0;
+
+      if (snapshot.empty) {
+        list.innerHTML = '<p class="no-events">No login events recorded yet.</p>';
+        document.getElementById('statSuccess').textContent = 0;
+        document.getElementById('statFailed').textContent = 0;
+        document.getElementById('statTotal').textContent = 0;
+        return;
+      }
+
+      list.innerHTML = snapshot.docs.map(doc => {
+        const e = doc.data();
+        if (e.type === 'success') success++;
+        else failed++;
+        return `
+          <div class="event-item ${e.type}">
+            <span class="event-badge ${e.type}">${e.type === 'success' ? '✅ SUCCESS' : '❌ FAILED'}</span>
+            <span class="event-time">${formatDate(e.ts)}</span>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('statSuccess').textContent = success;
+      document.getElementById('statFailed').textContent = failed;
+      document.getElementById('statTotal').textContent = success + failed;
+    });
+  }
+
+  document.getElementById('clearDecreesBtn').addEventListener('click', async () => {
+    if (!confirm('Clear ALL royal decrees? This cannot be undone.')) return;
+    const snap = await db.collection('decrees').get();
+    const batch = db.batch();
+    snap.docs.forEach(doc => batch.delete(doc.ref));
+    await batch.commit();
+    alert('✅ All royal decrees cleared.');
+  });
+
+
+</script>
+</body>
+</html>
