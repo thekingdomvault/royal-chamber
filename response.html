@@ -39,7 +39,6 @@
       z-index: 1;
     }
 
-    /* ── Sign Board ── */
     .sign-outer {
       text-align: center;
       margin-bottom: 3rem;
@@ -99,7 +98,6 @@
       18%, 21%, 54% { text-shadow: none; opacity: 0.4; }
     }
 
-    /* ── Card ── */
     .card {
       background: #fdf6e3;
       border: 4px double #8b6914;
@@ -136,7 +134,6 @@
       margin: 1rem 0;
     }
 
-    /* ── GIF wrap ── */
     .gif-wrap {
       text-align: center;
       margin-bottom: 1.2rem;
@@ -150,7 +147,6 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
     }
 
-    /* ── Write box ── */
     .write-label {
       font-size: 0.85rem;
       font-weight: 700;
@@ -196,7 +192,6 @@
     .post-btn:hover { background: #a00000; }
     .post-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #5a0000; }
 
-    /* ── Posts ── */
     .posts-wrap {
       display: flex;
       flex-direction: column;
@@ -232,7 +227,6 @@
       padding: 1.5rem 0;
     }
 
-    /* ── Back button ── */
     .back-btn {
       display: block;
       width: fit-content;
@@ -276,11 +270,10 @@
     </div>
     <div class="sign-board">
       <h1 class="sign-text">📜 Royal Decree Board 📜</h1>
-      <p class="sign-subtitle">👑 Her Highness's Official Complaints & Responses Department 👑</p>
+      <p class="sign-subtitle">Her Royal Highness's Official Space to Speak</p>
     </div>
   </div>
 
-  <!-- ── FMAB GIF ── -->
   <div class="card">
     <div class="gif-wrap">
       <video src="fmab.mp4" autoplay loop muted playsinline></video>
@@ -288,21 +281,19 @@
     <hr class="divider" />
     <p class="section-sub">
       The Royal Knight hath graciously opened this space for Her Highness to air her grievances,
-      drop a complaint, leave a review, or simply say whatever she wants.<br /><br />
-      The Knight will be reading every single word. Nervously. 😅
+      drop a complaint, leave a review or simply say whatever she wants.<br /><br />
+      The Knight and Kingdom's subjects will be reading every single word. Hopefully their souls doesn't leave their bodies while they read 😅
     </p>
   </div>
 
-  <!-- ── WRITE SECTION ── -->
   <div class="card">
     <p class="section-title">Leave a Royal Decree ✍️</p>
     <hr class="divider" />
-    <label class="write-label">⚔️ Speak thy truth to the kingdom, Your Highness:</label>
+    <label class="write-label"> Your subjects await..... Your Highness:</label>
     <textarea id="postInput" placeholder="Write your complaint, compliment, grievance, review, or royal roast here..."></textarea>
     <button class="post-btn" id="postBtn">📯 POST ROYAL DECREE 📯</button>
   </div>
 
-  <!-- ── POSTS SECTION ── -->
   <div class="card">
     <p class="section-title">📋 The Royal Records 📋</p>
     <hr class="divider" />
