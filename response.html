@@ -311,8 +311,7 @@
     <div class="posts-wrap" id="postsWrap">
       <p class="loading">Loading royal records... 📜</p>
     </div>
-    <!-- REMOVE THIS BUTTON BEFORE SHARING THE SITE -->
-    <button class="clear-btn" id="clearBtn">🗑 Clear all test posts</button>
+
   </div>
 
   <a href="gallery.html" class="back-btn">⬅ Return to the Royal Chamber</a>
@@ -347,7 +346,6 @@
       + ' · ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   }
 
-  // Live listener — updates in real time on any device
   decrees.orderBy('ts', 'desc').onSnapshot(snapshot => {
     const wrap = document.getElementById('postsWrap');
     if (snapshot.empty) {
