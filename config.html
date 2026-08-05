@@ -263,11 +263,6 @@
     </div>
   </div>
 
-  <div class="panel">
-    <div class="panel-title">🗑 Royal Records Management</div>
-    <button class="action-btn danger" id="clearDecreesBtn">📜 Clear All Royal Decrees (Complaint Board)</button>
-    <p class="action-note">This wipes all test posts from the Royal Decree Board. Use before sharing the site so it's clean for Her Highness.</p>
-  </div>
 
 </div>
 
@@ -348,14 +343,6 @@
     });
   }
 
-  document.getElementById('clearDecreesBtn').addEventListener('click', async () => {
-    if (!confirm('Clear ALL royal decrees? This cannot be undone.')) return;
-    const snap = await db.collection('decrees').get();
-    const batch = db.batch();
-    snap.docs.forEach(doc => batch.delete(doc.ref));
-    await batch.commit();
-    alert('✅ All royal decrees cleared.');
-  });
 
 
 </script>
